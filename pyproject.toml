@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docksmith"
+version = "1.0.0"
+description = "A simplified Docker-like image builder and container runtime (Python port of docksmith-engine)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+docksmith = "docksmith.cli:main"
+
+[tool.setuptools]
+packages = ["docksmith"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

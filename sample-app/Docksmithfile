@@ -1,0 +1,7 @@
+# Sample app: uses all six instructions.
+FROM base:latest
+WORKDIR /app
+COPY . /app
+ENV MESSAGE=Hello
+RUN echo "built at build time" > /app/build.txt && chmod +x /app/app/main.sh
+CMD ["sh", "/app/app/main.sh"]
