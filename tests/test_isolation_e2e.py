@@ -3,7 +3,6 @@
 These need root on Linux and are skipped otherwise.
 """
 
-import io
 import os
 import subprocess
 import sys

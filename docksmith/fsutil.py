@@ -8,7 +8,6 @@ import os
 import shutil
 import stat
 import tempfile
-from pathlib import Path
 
 # Top-level directories of a root filesystem that are runtime-only (device nodes,
 # kernel views). They are never recorded in layer deltas.
@@ -184,7 +183,3 @@ def is_within(child: str | os.PathLike, parent: str | os.PathLike) -> bool:
     child = os.path.realpath(child)
     parent = os.path.realpath(parent)
     return child == parent or child.startswith(parent.rstrip(os.sep) + os.sep)
-
-
-def as_path(p: str | os.PathLike) -> Path:
-    return p if isinstance(p, Path) else Path(p)

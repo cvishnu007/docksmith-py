@@ -85,12 +85,12 @@ def cmd_rmi(args, paths: StatePaths) -> int:
     status = 0
     for ref in args.images:
         try:
-            img = store.remove(ref)
+            img, deleted = store.remove(ref)
         except DocksmithError as exc:
             print(f"Error: {exc}", file=sys.stderr)
             status = 1
             continue
-        print(f"Removed image {img.ref} ({_short(img.digest)}, {len(img.layers)} layer file(s) deleted)")
+        print(f"Removed image {img.ref} ({_short(img.digest)}, {deleted} layer file(s) deleted)")
     return status
 
 

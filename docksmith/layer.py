@@ -238,9 +238,3 @@ class LayerStore:
             return True
         except FileNotFoundError:
             return False
-
-    def create_from_tree(self, root: str, before: dict, after: dict) -> tuple[str, int]:
-        from .fsutil import diff_snapshots
-
-        changed, deleted = diff_snapshots(before, after)
-        return self.put(build_layer_tar(root, changed, deleted))

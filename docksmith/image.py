@@ -155,13 +155,16 @@ class ImageStore:
         out.sort(key=lambda i: (i.name, i.tag))
         return out
 
-    def remove(self, ref: str) -> Image:
-        """Delete the manifest and every layer file it references (no ref-counting)."""
+    def remove(self, ref: str) -> tuple[Image, int]:
+        """Delete the manifest and every layer file it references (no ref-counting).
+
+        Returns the removed image and how many layer files were actually deleted
+        (layers shared with an already-removed image may be gone already).
+        """
         img = self.load(ref)
-        for layer in img.layers:
-            self.layers.remove(layer.digest)
+        deleted = sum(1 for layer in img.layers if self.layers.remove(layer.digest))
         os.unlink(self._path(img.name, img.tag))
-        return img
+        return img, deleted
 
     @staticmethod
     def verify_digest(path: str) -> bool:

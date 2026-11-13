@@ -5,6 +5,9 @@ Python (standard library only). This is a complete Python rewrite of the Go
 project [`docksmith-engine`](https://github.com/cvishnu007/docksmith-engine), with the gaps
 against the Docksmith spec filled in (see [What changed vs. the Go version](#what-changed-vs-the-go-version)).
 
+> **New here?** [GUIDE.md](GUIDE.md) explains the whole project from scratch: concepts,
+> every module and function, how they connect, and every command.
+
 Docksmith reads a `Docksmithfile`, builds content-addressed delta layers with a
 deterministic build cache, and runs containers in an isolated root filesystem
 using Linux namespaces + `pivot_root` (falling back to `chroot`). No daemon, no
@@ -25,14 +28,18 @@ CLI ─► Parser ─► Builder ─┬─► Cache  (cache/  key → layer dige
 - **Python 3.12+**. No third-party packages.
 - Fully **offline** after the one-time base image import.
 
-Run it straight from the checkout (`python3 -m docksmith …`), or install it:
+Run it straight from the checkout (`python3 -m docksmith …`), or install it into a virtualenv:
 
 ```bash
-pip install .
+python3 -m venv .venv
 ```
 
 ```bash
-sudo docksmith --help
+.venv/bin/pip install .
+```
+
+```bash
+sudo .venv/bin/docksmith --help
 ```
 
 Use `sudo` for both build and run so everything lives in root's `~/.docksmith/`.

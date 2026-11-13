@@ -8,11 +8,11 @@ from typing import Callable
 
 from .cache import BuildCache, cache_key
 from .copyops import apply_copy, hash_sources, resolve_container_path
-from .fsutil import Snapshotter, ensure_dev_nodes, ensure_dir_in_root, make_tempdir, resolve_in_root, rmtree
+from .fsutil import (Snapshotter, diff_snapshots, ensure_dev_nodes, ensure_dir_in_root, make_tempdir,
+                     resolve_in_root, rmtree)
 from .image import ImageStore
 from .isolation import check_supported, run_isolated
 from .layer import LayerStore, build_layer_tar
-from .fsutil import diff_snapshots
 from .models import BuildError, BuildStep, DocksmithError, Image, ImageConfig, ImageLayer, Instruction
 from .paths import StatePaths
 from .refs import format_ref, parse_ref
